@@ -7,7 +7,7 @@ import { NUM_OF_GUESSES_ALLOWED } from '/src/constants.js'
 
 function Game({ setGuesses, guesses, answer, setState }) {
   const [input, setInput] = useState('')
-  const [inputDisabled, setInputDisabled] = useState('false')
+  const [inputDisabled, setInputDisabled] = useState(false)
   return (
     <form
       class="guess-input-wrapper"
@@ -17,7 +17,7 @@ function Game({ setGuesses, guesses, answer, setState }) {
         setInput('')
         const currentValidity = checkGuess(input, answer)
         let countValid = 0
-        for (i = 0; i < input.length; i++) {
+        for (let i = 0; i < input.length; i++) {
           if (currentValidity[i].status !== 'correct') {
             countValid++
           }
@@ -25,7 +25,7 @@ function Game({ setGuesses, guesses, answer, setState }) {
         if (countValid === 0) {
           setState('won')
           setInputDisabled(true)
-        } else if (guesses && guesses.length >= NUM_OF_GUESSES_ALLOWED) {
+        } else if (guesses && guesses.length >= NUM_OF_GUESSES_ALLOWED - 1) {
           setState('lost')
           setInputDisabled(true)
         }
@@ -33,7 +33,7 @@ function Game({ setGuesses, guesses, answer, setState }) {
     >
       <label for="guess-input">Enter guess:</label>
       <input
-        disabled={!inputDisabled}
+        disabled={inputDisabled}
         required
         maxLength={5}
         pattern="\w{5,5}"

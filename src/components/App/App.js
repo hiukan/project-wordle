@@ -20,7 +20,12 @@ function App() {
       <Header />
 
       <div className="game-wrapper">
-        <Game setGuesses={setGuesses} answer={answer} setState={setState} />
+        <Game
+          setGuesses={setGuesses}
+          answer={answer}
+          setState={setState}
+          guesses={guesses}
+        />
         {state === 'won' && (
           <div class="happy banner">
             <p>
